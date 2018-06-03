@@ -3,7 +3,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 using namespace std;
 
@@ -29,18 +29,18 @@ struct morseCode{
 }; //end of morseCode
 
 //forward declarations
-void fillMaps(map<char, string>& e, map<string, char>& d);
-morseCode encode(string& input, map<char, string>& e);
-morseCode decode(string& input, map<string, char>& d);
-vector<morseCode> parse(map<char, string>& e, map<string, char>& d, const string& s);
+void fillMaps(unordered_map<char, string>& e, unordered_map<string, char>& d);
+morseCode encode(string& input, unordered_map<char, string>& e);
+morseCode decode(string& input, unordered_map<string, char>& d);
+vector<morseCode> parse(unordered_map<char, string>& e, unordered_map<string, char>& d, const string& s);
 void toFile(vector<morseCode>& m);
 
 int main(){
 
     
     //let's populate our key-value maps
-    map<char, string> encode;
-    map<string, char> decode;
+    unordered_map<char, string> encode;
+    unordered_map<string, char> decode;
 
     fillMaps(encode, decode);
 
@@ -76,7 +76,7 @@ int main(){
     return 0;
 }
 
-void fillMaps(map<char, string>& e, map<string, char>& d){
+void fillMaps(unordered_map<char, string>& e, unordered_map<string, char>& d){
 
     //open filestream
     ifstream ist{"morsecode.txt"};
@@ -103,7 +103,7 @@ void fillMaps(map<char, string>& e, map<string, char>& d){
 
 }
 
-morseCode encode(string& input, map<char, string>& e){
+morseCode encode(string& input, unordered_map<char, string>& e){
 
     //input should be a string of letters
     //create stringstream to break into words
@@ -129,7 +129,7 @@ morseCode encode(string& input, map<char, string>& e){
 
 }
 
-morseCode decode(string& input, map<string, char>& d){
+morseCode decode(string& input, unordered_map<string, char>& d){
 
     //input should be a string of characters
     //create stringstream to break into words
@@ -154,7 +154,7 @@ morseCode decode(string& input, map<string, char>& d){
 
 }
 
-vector<morseCode> parse(map<char, string>& e, map<string, char>& d, const string& userFlag){
+vector<morseCode> parse(unordered_map<char, string>& e, unordered_map<string, char>& d, const string& userFlag){
 
     
     //tmp vector for objects
